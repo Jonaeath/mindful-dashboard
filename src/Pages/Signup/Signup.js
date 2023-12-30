@@ -2,18 +2,41 @@ import { useState } from "react";
 
 const Signup = () => {
   const [values, setValues] = useState({
-    username: "",
+    name: "",
     email: "",
+    gender:"",
+    heardAbout: [],
+    city: "", 
+    state: "",
   });
 
   const handelSubmit = (e) => {
     e.preventDefault();
   };
 
+  const toggleCheckbox = (arr, value) => {
+    if (arr.includes(value)) {
+      return arr.filter((item) => item !== value);
+    } else {
+      return [...arr, value];
+    }
+  };
+
+  const citiesToStates = {
+    Mumbai: "Maharashtra",
+    Pune: "Maharashtra",
+    Ahmedabad: "Gujarat",
+    // Add more city-state mappings as needed
+  };
+
+  const handleCityChange = (city) => {
+    setValues({ ...values, city, state: citiesToStates[city] || "" });
+  };
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-0.45s shadow-2xl bg-base-100">
           <form onSubmit={handelSubmit} className="card-body">
             <h1 className="text-center uppercase text-xl">Registration</h1>
             <div className="form-control">
@@ -57,6 +80,147 @@ const Signup = () => {
                 onChange={(e) =>
                   setValues({ ...values, password: e.target.value })
                 }
+              />
+            </div>
+            <div className="">
+              <span className="label">Gender</span>
+              <label className="radio mr-3 p-1.5">
+                <input
+                  type="radio"
+                  value="Male"
+                  checked={values.gender === "Male"}
+                  onChange={(e) =>
+                    setValues({ ...values, gender: e.target.value })
+                  }
+                />
+                <span className="label-text ml-1">Male</span>
+              </label>
+              <label className="radio mr-3 p-1.5">
+                <input
+                  type="radio"
+                  value="Female"
+                  checked={values.gender === "Female"}
+                  onChange={(e) =>
+                    setValues({ ...values, gender: e.target.value })
+                  }
+                />
+                <span className="label-text ml-1">Female</span>
+              </label>
+              <label className="radio p-1.5">
+                <input
+                  type="radio"
+                  value="Others"
+                  checked={values.gender === "Others"}
+                  onChange={(e) =>
+                    setValues({ ...values, gender: e.target.value })
+                  }
+                />
+                <span className="label-text ml-1">Others</span>
+              </label>
+            </div>
+            <div className="">
+              <span className="label m-2">How did you hear about this?</span>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="LinkedIn"
+                  checked={values.heardAbout.includes("LinkedIn")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(
+                        values.heardAbout,
+                        "LinkedIn"
+                      ),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">LinkedIn</span>
+              </label>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="Friends"
+                  checked={values.heardAbout.includes("Friends")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(
+                        values.heardAbout,
+                        "Friends"
+                      ),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">Friends</span>
+              </label>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="Job Portal"
+                  checked={values.heardAbout.includes("Job Portal")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(
+                        values.heardAbout,
+                        "Job Portal"
+                      ),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">Job Portal</span>
+              </label>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="Others"
+                  checked={values.heardAbout.includes("Others")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(
+                        values.heardAbout,
+                        "Others"
+                      ),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">Others</span>
+              </label>
+            </div>
+            <div className="form-control">
+              <span className="label">How did you hear about this?</span>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">City</span>
+              </label>
+              <select
+                value={values.city}
+                onChange={(e) => handleCityChange(e.target.value)}
+                className="select select-bordered"
+              >
+                <option value="" disabled>
+                  Select City
+                </option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+              </select>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">State</span>
+              </label>
+              <input
+                type="text"
+                value={values.state}
+                onChange={(e) =>
+                  setValues({ ...values, state: e.target.value })
+                }
+                className="input input-bordered"
+                placeholder="Enter State"
               />
             </div>
             <div className="form-control mt-6">
