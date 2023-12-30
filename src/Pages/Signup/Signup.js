@@ -5,6 +5,7 @@ const Signup = () => {
     name: "",
     email: "",
     gender:"",
+    phoneNumber:"",
     heardAbout: [],
     city: "", 
     state: "",
@@ -36,7 +37,7 @@ const Signup = () => {
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
-        <div className="card flex-shrink-0 w-0.45s shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-0.45 shadow-2xl bg-base-100">
           <form onSubmit={handelSubmit} className="card-body">
             <h1 className="text-center uppercase text-xl">Registration</h1>
             <div className="form-control">
@@ -69,6 +70,20 @@ const Signup = () => {
             </div>
             <div className="form-control">
               <label className="label">
+                <span className="label-text">Phone Number</span>
+              </label>
+              <input
+                type="phoneNumber"
+                name="phoneNumber"
+                placeholder="phoneNumber"
+                className="input input-bordered"
+                required
+                onChange={(e) =>
+                  setValues({ ...values, phoneNumber: e.target.value })
+                }
+              />
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
@@ -81,6 +96,7 @@ const Signup = () => {
                   setValues({ ...values, password: e.target.value })
                 }
               />
+            </div>
             </div>
             <div className="">
               <span className="label">Gender</span>
