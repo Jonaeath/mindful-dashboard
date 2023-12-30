@@ -1,6 +1,10 @@
-import { useState } from "react";
+import React,{ useContext, useState } from "react";
+import { authContext } from "../../Context/AuthProvider/AuthProvider";
 
 const Signup = () => {
+
+const {createUser} = useContext(authContext)
+
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -11,8 +15,37 @@ const Signup = () => {
     state: "",
   });
 
+
   const handelSubmit = (e) => {
     e.preventDefault();
+    const form =  e.target;
+    const {email,password, name,phoneNumber, gender,heardAbout, city,state  } = values;
+    createUser(email,password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+            if(user){
+                alert('Your SignUp Complete Successfully')
+                saveUser(name, email,phoneNumber, gender,heardAbout, city,state);
+                form.reset() 
+            }
+        })
+        .catch(err => console.error(err))
+}
+// Function for send data Database
+const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
+  const user = {name, email ,phoneNumber, gender,heardAbout, city,state};
+  fetch('http://localhost:4000/users',{
+        method:'POST',
+        headers:{
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(user)
+    }) 
+    .then(res => res.json())
+  .then(data => {
+    console.log(data)
+  })      
   };
 
   const toggleCheckbox = (arr, value) => {
@@ -37,7 +70,7 @@ const Signup = () => {
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
-        <div className="card flex-shrink-0 w-0.45 shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-4/12 shadow-2xl bg-base-100">
           <form onSubmit={handelSubmit} className="card-body">
             <h1 className="text-center uppercase text-xl">Registration</h1>
             <div className="form-control">
@@ -206,9 +239,6 @@ const Signup = () => {
               </label>
             </div>
             <div className="form-control">
-              <span className="label">How did you hear about this?</span>
-            </div>
-            <div className="form-control">
               <label className="label">
                 <span className="label-text">City</span>
               </label>
@@ -239,8 +269,8 @@ const Signup = () => {
                 placeholder="Enter State"
               />
             </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-success uppercase bg-lime-500">
+            <div className="text-center mt-6">
+              <button className="btn btn-success uppercase w-1/2 bg-lime-500">
                 Sign UP
               </button>
             </div>
