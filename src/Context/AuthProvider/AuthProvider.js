@@ -23,7 +23,7 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth,email,password) 
         .catch((err) => {
             console.error(err);
-            alert("Invalid credentials. Please check your email and password.");
+            alert("Invalid Email and Password. Please Registration/SignUp for Logins.");
         });   
     } 
 

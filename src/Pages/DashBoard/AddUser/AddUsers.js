@@ -1,62 +1,35 @@
-import React,{ useContext, useState } from "react";
-import { authContext } from "../../Context/AuthProvider/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link} from "react-router-dom";
 
-const Signup = () => {
+const AddUsers = () => {
 
-const {createUser} = useContext(authContext)
-const navigate = useNavigate();
 
   const [values, setValues] = useState({
     name: "",
     email: "",
-    gender:"",
-    phoneNumber:"",
+    gender: "",
+    phoneNumber: "",
     heardAbout: [],
-    city: "", 
+    city: "",
     state: "",
   });
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    const form =  e.target;
-    const {email,password, name,gender,heardAbout, city,state } = values;
-    createUser(email,password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            if(user){
-                alert('Your SignUp Complete Successfully')
-                saveUser(email,password, name,gender,heardAbout, city,state);
-                form.reset()
-                setValues({
-                  name: "",
-                  email: "",
-                  gender: "",
-                  phoneNumber: "",
-                  heardAbout: [],
-                  city: "",
-                  state: "",
-                }); 
-                navigate('/')
-            }
-        })
-        .catch(err => console.error(err))
-}
-// Function for send data Database
-const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
-  const user = {name, email ,phoneNumber, gender,heardAbout, city,state};
-  fetch('http://localhost:4000/users',{
-        method:'POST',
-        headers:{
-            'content-type':'application/json'
-        },
-        body: JSON.stringify(user)
-    }) 
-    .then(res => res.json())
-  .then(data => {
-    console.log(data)
-  })      
+   
+  // Function for send data Database
+
+    fetch("http://localhost:4000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   const toggleCheckbox = (arr, value) => {
@@ -126,21 +99,21 @@ const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
                   setValues({ ...values, phoneNumber: e.target.value })
                 }
               />
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="password"
-                className="input input-bordered"
-                required
-                onChange={(e) =>
-                  setValues({ ...values, password: e.target.value })
-                }
-              />
-            </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  className="input input-bordered"
+                  required
+                  onChange={(e) =>
+                    setValues({ ...values, password: e.target.value })
+                  }
+                />
+              </div>
             </div>
             <div className="">
               <span className="label">Gender</span>
@@ -188,10 +161,7 @@ const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
                   onChange={() =>
                     setValues({
                       ...values,
-                      heardAbout: toggleCheckbox(
-                        values.heardAbout,
-                        "LinkedIn"
-                      ),
+                      heardAbout: toggleCheckbox(values.heardAbout, "LinkedIn"),
                     })
                   }
                 />
@@ -205,10 +175,7 @@ const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
                   onChange={() =>
                     setValues({
                       ...values,
-                      heardAbout: toggleCheckbox(
-                        values.heardAbout,
-                        "Friends"
-                      ),
+                      heardAbout: toggleCheckbox(values.heardAbout, "Friends"),
                     })
                   }
                 />
@@ -239,10 +206,7 @@ const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
                   onChange={() =>
                     setValues({
                       ...values,
-                      heardAbout: toggleCheckbox(
-                        values.heardAbout,
-                        "Others"
-                      ),
+                      heardAbout: toggleCheckbox(values.heardAbout, "Others"),
                     })
                   }
                 />
@@ -280,13 +244,13 @@ const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
                 placeholder="Enter State"
               />
             </div>
-           
-            <div className="text-center mt-6">
-              <button className="btn btn-success uppercase w-1/2 bg-lime-500">
-                Sign UP
-              </button>
-            </div> 
-           
+            <Link to="/login">
+              <div className="text-center mt-6">
+                <button className="btn btn-success uppercase w-1/2 bg-lime-500">
+                  Sign UP
+                </button>
+              </div>
+            </Link>
           </form>
         </div>
       </div>
@@ -294,4 +258,4 @@ const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
   );
 };
 
-export default Signup;
+export default AddUsers;
