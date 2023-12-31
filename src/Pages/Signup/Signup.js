@@ -15,7 +15,6 @@ const {createUser} = useContext(authContext)
     state: "",
   });
 
-
   const handelSubmit = (e) => {
     e.preventDefault();
     const form =  e.target;
@@ -27,7 +26,16 @@ const {createUser} = useContext(authContext)
             if(user){
                 alert('Your SignUp Complete Successfully')
                 saveUser(name, email,phoneNumber, gender,heardAbout, city,state);
-                form.reset() 
+                form.reset()
+                setValues({
+                  name: "",
+                  email: "",
+                  gender: "",
+                  phoneNumber: "",
+                  heardAbout: [],
+                  city: "",
+                  state: "",
+                }); 
             }
         })
         .catch(err => console.error(err))
@@ -69,7 +77,7 @@ const saveUser = (name,email,phoneNumber, gender,heardAbout, city,state) =>{
 
   return (
     <div>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen mt-1 bg-base-200">
         <div className="card flex-shrink-0 w-4/12 shadow-2xl bg-base-100">
           <form onSubmit={handelSubmit} className="card-body">
             <h1 className="text-center uppercase text-xl">Registration</h1>
