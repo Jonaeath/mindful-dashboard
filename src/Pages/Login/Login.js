@@ -17,13 +17,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        if (login) {
+        if (user) {
           alert("Your Login Complete Successfully");
           form.reset();
         }
       })
-      .catch((err) => console.error(err));
-  };
+      .catch((err) => {
+        console.error(err.code, err.message);
+    });  };
 
   return (
       <div className="hero min-h-screen mt-1 bg-base-200">

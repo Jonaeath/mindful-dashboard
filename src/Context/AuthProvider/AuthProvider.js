@@ -20,7 +20,11 @@ const AuthProvider = ({children}) => {
 
     const login = (email, password) =>{
         setLoading(true)
-        return signInWithEmailAndPassword(auth,email,password)
+        return signInWithEmailAndPassword(auth,email,password) 
+        .catch((err) => {
+            console.error(err);
+            alert("Invalid credentials. Please check your email and password.");
+        });   
     } 
 
     const logOut =() =>{
