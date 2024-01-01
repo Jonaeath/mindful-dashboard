@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { Link} from "react-router-dom";
 
 const AddUsers = () => {
-
-
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -16,15 +13,13 @@ const AddUsers = () => {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-   
-  // Function for send data Database
-
+    // Function for send data Database
     fetch("http://localhost:4000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(values),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -243,14 +238,12 @@ const AddUsers = () => {
                 className="input input-bordered"
                 placeholder="Enter State"
               />
-            </div>
-            <Link to="/login">
+            </div>       
               <div className="text-center mt-6">
                 <button className="btn btn-success uppercase w-1/2 bg-lime-500">
-                  Sign UP
+                  Add New User
                 </button>
               </div>
-            </Link>
           </form>
         </div>
       </div>

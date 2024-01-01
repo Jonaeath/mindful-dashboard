@@ -15,8 +15,13 @@ const DashBoard = () => {
   return (
     <div>
       <div className="d-flex mx-5 mt-6 bg-blue-100">
-        <div className="rounded text-white p-3">
+        <div className="rounded p-3">
           <h2>Admin Rule</h2>
+          <Link to="/createUser">
+            <button className="btn btn-success btn-sm uppercase mr-2 bg-lime-500">
+              Add New User +
+            </button>
+          </Link>
           <div className="d-flex justify-content-end mb-3"></div>
           <table className="table">
             <thead>
@@ -25,7 +30,7 @@ const DashBoard = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th> Add New Users | Edit | Delete</th>
+                <th>Edit | Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -38,22 +43,24 @@ const DashBoard = () => {
                       <td>{users.email}</td>
                       <td>{users.phoneNumber}</td>
                       <td>
-                        <Link to="/create">
-                          <button className="btn btn-success btn-sm uppercase mr-2 bg-lime-500">
-                            Add New Users
-                          </button>
-                        </Link>
-                        <Link to={`/edit/${users.id}`}>
-                          <button className="btn btn-success btn-sm uppercase mr-2 bg-lime-500">
-                            Edit
-                          </button>
-                        </Link>
-                        <button
-                          onClick={() => handelDelete(users.id)}
-                          className="btn btn-success btn-sm uppercase bg-lime-500"
-                        >
-                          Delete
-                        </button>
+                          
+                            <Link to={`/userDetails/${users._id}`}>
+                              <button className="btn btn-success btn-sm uppercase mr-2 bg-lime-500">
+                                Details
+                              </button>
+                            </Link>
+                            <Link to={`/edit/${users.id}`}>
+                              <button className="btn btn-success btn-sm uppercase mr-2 bg-lime-500">
+                                Edit
+                              </button>
+                            </Link>
+                            <button
+                              onClick={() => handelDelete(users.id)}
+                              className="btn btn-success btn-sm uppercase bg-lime-500"
+                            >
+                              Delete
+                            </button>
+                
                       </td>
                     </tr>
                   );
