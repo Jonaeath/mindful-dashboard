@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const DashBoard = () => {
   const [data, setData] = useState([]);
+ 
 
   useEffect(() => {
     fetch("http://localhost:4000/users")
@@ -11,7 +12,29 @@ const DashBoard = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const handelDelete = (id) => {};
+  const handelDelete = (id) => {
+    const proceed = window.confirm('Are you sure you want to delete this user?');
+    if (proceed) {
+      fetch(`http://localhost:4000/delete/${id}`, {
+        method: 'DELETE',
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.success) {
+            alert('User deleted successfully.');
+            const updatedUsers = data.filter((user) => user._id !== id);
+            setData(updatedUsers);
+          } else {
+            alert('Failed to delete user: ' + data.message);
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+  
+  
+
   return (
     <div>
       <div className="d-flex mx-5 mt-6 bg-blue-100">
@@ -55,7 +78,7 @@ const DashBoard = () => {
                               </button>
                             </Link>
                             <button
-                              onClick={() => handelDelete(users.id)}
+                              onClick={() => handelDelete(users._id)}
                               className="btn btn-success btn-sm uppercase bg-lime-500"
                             >
                               Delete

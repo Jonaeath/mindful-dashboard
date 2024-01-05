@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+Task for Full stack Developer Hiring
+Hiring Rounds 
+ Please send your confirmation if you are doing the task o hiring@mindfulgurukul.com
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1.       Round 1-you will be assigned a project which you need to submit asap ,
 
-## Available Scripts
+2.       Round 2-if shortlisted followed by a senior developer meeting
 
-In the project directory, you can run:
+3.       Round 3-Meeting with the CEO if shortlisted.
 
-### `npm start`
+ Task
+PFB Task definition in breakdown format. You can choose any font-end and back-end pair to complete the definition. (Preferred React Native + Node + MongoDB)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+you cab also do on React JS if you are not knowing React Native.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You can work on this assignment based on your availability and share with us within 3 days. Kindly plan accordingly and share a hosted site/apk  with Github Link.
 
-### `npm test`
+ 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Objective:
 
-### `npm run build`
+Users should be able to sign-up  and login in to the app. Logged in users should be able to add new USER and perform basic CRUD operation.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+They should be able to see saved records in ListView at the dashboard screen. They can search, filter the records. If required they can edit and delete records one by one.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1 – Signup Screen ; Ask user to fill all fields a mandatory to save in the API
 
-### `npm run eject`
+ 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Name – Textbox – Alphabets only
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Email  – Textbox – Alphanumeric only
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Phone –  – Textbox – Number only
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Gender – Radio button – Male, Female and Others
 
-## Learn More
+How did you hear about this? – Check box – LinkedIn, Friends, Job Portal, Others
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+City :  Drop-Down – Static value – Mumbai, Pune, Ahmedabad
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+State: Auto Suggested Search Textbox – Static  – Gujarat, Maharashtra, Karnataka
 
-### Code Splitting
+Save – Button
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ 
 
-### Analyzing the Bundle Size
+2. Login:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Email
 
-### Making a Progressive Web App
+Password
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+ 
 
-### Advanced Configuration
+3. Dashboard screen has a user listing that should show Username, Email, and Phone in the card item
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. If there are no users added, show the default placeholder image “No Data Found”
 
-### Deployment
+5. There should be a floating bar button or options menu to add new user details same as the listing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+6. Add User – Add User Name, Mobile and Email address – Save & Cancel Button
 
-### `npm run build` fails to minify
+7. View Details – On Clicking on the list item, the next screen should open and that shows the user details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+8. Edit User – There should be an edit icon in each list item to edit the records. On post-edit records as success – show a message in dialog and redirect automatically to the dashboard page where the card item should be updated.
+
+9. Delete User –  In the dashboard listing card should have the option to delete the record. Show confirmation dialog before deleting and on success delete the record from the list and UI should be updated.
+
+10. Dashboard should have filter option – A-Z / Z-A / Last modified / Last Inserted
+
+11. Dashboard should have the option to search by Name, Mobile, or email, As a result, the list should show only selected items that come under the search keywords
+
+12. OnRelaod of the app, Filter should be saved
+
+13. All records should be stored in a local database
+
+14. If there are no records available in the local database fetch them from the API and save them in a local database for further use.
+
+15. Ensure the network is available before hitting the API, If not show a message / Snackbar to enable WI-FI / Mobile Data
+
+ 
+
+Add-On – Take a picture from the camera and Gallery and show it to each user. This will be for offline only. API will not provide the Image URL. App should work for online and offline both (Login and Register doesn’t require store all fields in local database, Only User CRUD operation data should be save)
+
+ 
+
+Note: Code should be written as per the best practices
+
+ 
+
+Expected Output:
+
+ 
+
+It should be design with nice UI-IX
+
+It should follow the best code practices
+
+Unit testing evidence
+
+ 
