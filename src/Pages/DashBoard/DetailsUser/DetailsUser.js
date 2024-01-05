@@ -7,7 +7,6 @@ const DetailsUser = () => {
 
   useEffect(() => {
     fetch(`http://localhost:4000/details/${id}`)
-      // fetch("http://localhost:4000/details/6590228bf48cc15bbbfc4a75")
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((error) => console.log(error));
@@ -25,7 +24,7 @@ const DetailsUser = () => {
             <Link to="/">
               <button className="btn btn-sm btn-success">Back</button>
             </Link>
-            <Link to={`/edit/${users.id}`}>
+            <Link to={`/editUser/${users._id}`}>
               <button className="btn btn-sm btn-info mx-2">Edit</button>
             </Link>
           </div>

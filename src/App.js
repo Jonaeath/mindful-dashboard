@@ -7,6 +7,7 @@ import Login from "./Pages/Login/Login";
 import DashBoard from "./Pages/DashBoard/DashBoard/DashBoard";
 import AddUsers from "./Pages/DashBoard/AddUser/AddUsers";
 import DetailsUser from "./Pages/DashBoard/DetailsUser/DetailsUser";
+import EditUser from "./Pages/DashBoard/EditUser/EditUser";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<DashBoard/>} />
         <Route path="/createUser" element={<AddUsers/>} />
         <Route path="/userDetails/:id" element={<DetailsUser/>} />
+        <Route path="/editUser/:id" element={<EditUser/>} />
       </Routes>
     </Router>
   );

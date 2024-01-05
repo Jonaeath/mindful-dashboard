@@ -49,7 +49,7 @@ const DashBoard = () => {
                                 Details
                               </button>
                             </Link>
-                            <Link to={`/edit/${users.id}`}>
+                            <Link to={`/editUser/${users._id}`}>
                               <button className="btn btn-success btn-sm uppercase mr-2 bg-lime-500">
                                 Edit
                               </button>

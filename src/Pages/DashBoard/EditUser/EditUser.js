@@ -1,0 +1,271 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+const EditUser = () => {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    gender: "",
+    heardAbout: [],
+    city: "",
+    state: "",
+  });
+
+  const {id} = useParams();
+
+  
+  useEffect(() => {
+    // Fetch user data based on id when the component mounts
+    fetch(`http://localhost:4000/details/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // Update state with fetched user data
+        setValues({
+          name: data.name,
+          email: data.email,
+          gender: data.gender,
+          phoneNumber: data.phoneNumber,
+          heardAbout: data.heardAbout,
+          city: data.city,
+          state: data.state,
+        });
+      });
+  }, [id]);
+
+  const handelSubmit = (e) => {
+    e.preventDefault();
+    // Function to send updated data to the database
+    fetch(`http://localhost:4000/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      
+      })
+      .catch((error) => {
+        console.error("Error updating user:", error);
+      });
+  };
+  
+  const toggleCheckbox = (arr, value) => {
+    if (arr.includes(value)) {
+      return arr.filter((item) => item !== value);
+    } else {
+      return [...arr, value];
+    }
+  };
+
+  const citiesToStates = {
+    Mumbai: "Maharashtra",
+    Pune: "Maharashtra",
+    Ahmedabad: "Gujarat",
+    // Add more city-state mappings as needed
+  };
+
+  const handleCityChange = (city) => {
+    setValues({ ...values, city, state: citiesToStates[city] || "" });
+  };
+
+  return (
+    <div>
+      <div className="hero min-h-screen mt-1 bg-base-200">
+        <div className="card flex-shrink-0 w-4/12 shadow-2xl bg-base-100">
+          <form onSubmit={handelSubmit} className="card-body">
+            <h1 className="text-center uppercase text-xl">Registration</h1>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="name"
+                name="name"
+                placeholder="Name"
+                className="input input-bordered"
+                required
+                value = {values.name}
+                onChange={(e) => setValues({ ...values, name: e.target.value })}
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="email"
+                className="input input-bordered"
+                required
+                value = {values.email}
+                onChange={(e) =>
+                  setValues({ ...values, email: e.target.value })
+                }
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Phone Number</span>
+              </label>
+              <input
+                type="phoneNumber"
+                name="phoneNumber"
+                placeholder="phoneNumber"
+                className="input input-bordered"
+                required
+                value = {values.phoneNumber}
+                onChange={(e) =>
+                  setValues({ ...values, phoneNumber: e.target.value })
+                }
+              />
+             
+            </div>
+            <div className="">
+              <span className="label">Gender</span>
+              <label className="radio mr-3 p-1.5">
+                <input
+                  type="radio"
+                  value="Male"
+                  checked={values.gender === "Male"}
+                  onChange={(e) =>
+                    setValues({ ...values, gender: e.target.value })
+                  }
+                />
+                <span className="label-text ml-1">Male</span>
+              </label>
+              <label className="radio mr-3 p-1.5">
+                <input
+                  type="radio"
+                  value="Female"
+                  checked={values.gender === "Female"}
+                  onChange={(e) =>
+                    setValues({ ...values, gender: e.target.value })
+                  }
+                />
+                <span className="label-text ml-1">Female</span>
+              </label>
+              <label className="radio p-1.5">
+                <input
+                  type="radio"
+                  value="Others"
+                  checked={values.gender === "Others"}
+                  onChange={(e) =>
+                    setValues({ ...values, gender: e.target.value })
+                  }
+                />
+                <span className="label-text ml-1">Others</span>
+              </label>
+            </div>
+            <div className="">
+              <span className="label m-2">How did you hear about this?</span>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="LinkedIn"
+                  checked={values.heardAbout.includes("LinkedIn")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(values.heardAbout, "LinkedIn"),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">LinkedIn</span>
+              </label>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="Friends"
+                  checked={values.heardAbout.includes("Friends")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(values.heardAbout, "Friends"),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">Friends</span>
+              </label>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="Job Portal"
+                  checked={values.heardAbout.includes("Job Portal")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(
+                        values.heardAbout,
+                        "Job Portal"
+                      ),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">Job Portal</span>
+              </label>
+              <label className="checkbox mr-1 p-1">
+                <input
+                  type="checkbox"
+                  value="Others"
+                  checked={values.heardAbout.includes("Others")}
+                  onChange={() =>
+                    setValues({
+                      ...values,
+                      heardAbout: toggleCheckbox(values.heardAbout, "Others"),
+                    })
+                  }
+                />
+                <span className="label-text ml-1">Others</span>
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">City</span>
+              </label>
+              <select
+                name="city"
+                placeholder="City"
+                value={values.city}
+                onChange={(e) => handleCityChange(e.target.value)}
+                className="select select-bordered"
+              >
+                <option value="" disabled>
+                  Select City
+                </option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+              </select>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">State</span>
+              </label>
+              <input
+                type="text"
+                value={values.state}
+                onChange={(e) =>
+                  setValues({ ...values, state: e.target.value })
+                }
+                className="input input-bordered"
+                placeholder="Enter State"
+              />
+            </div>       
+              <div className="text-center mt-6">
+                <button className="btn btn-success uppercase w-1/2 bg-lime-500">
+                    Update
+                </button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EditUser;
