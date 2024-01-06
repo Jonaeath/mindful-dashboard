@@ -8,7 +8,6 @@ import DashBoard from "./Pages/DashBoard/DashBoard/DashBoard";
 import AddUsers from "./Pages/DashBoard/AddUser/AddUsers";
 import DetailsUser from "./Pages/DashBoard/DetailsUser/DetailsUser";
 import EditUser from "./Pages/DashBoard/EditUser/EditUser";
-import DisplaySearchItem from "./Pages/SearchForm/DisplaySearchItem";
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/dashboard" element={<DashBoard/>} />
-        <Route path="/displaySearchItem" element={<DisplaySearchItem/>} />
         <Route path="/createUser" element={<AddUsers/>} />
         <Route path="/userDetails/:id" element={<DetailsUser/>} />
         <Route path="/editUser/:id" element={<EditUser/>} />

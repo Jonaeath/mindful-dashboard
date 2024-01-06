@@ -1,19 +1,54 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import { searchContext } from "../../Context/SearchProvider/SearchProvider";
 
-const SearchForm = () => {
+const SearchForm = ({setData, setIsDataChanged, isDataChanged}) => {
+  const [searchValue, setSearchValue] = useState('')
   const {auth, setAuth} = useContext(searchContext)
   console.log('values', auth)
   const navigate = useNavigate()
+  //Get Search value from url
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search')
+  console.log('search', search)
+
+  const getDataBasedOnSearch = async()=>{
+    const {data} = await axios.get(`http://localhost:4000/search/${search}`);
+    console.log('search res---->', data)
+    setData(data)
+  }
+
+  useEffect(()=>{
+    if(search && search !== ""){
+      getDataBasedOnSearch()
+
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[search])
+
+  // if empty
+  useEffect(()=>{
+    if(searchValue === ""){
+      setIsDataChanged(!isDataChanged)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[searchValue])
 
   const handelSubmit = async (e) =>{
     e.preventDefault();
     try {
-        const {data} = await axios.get(`http://localhost:4000/search/${auth.keyword}`);
-        setAuth({...auth, results:data}) // results:data equal to context result:[]
-        navigate('/displaySearchItem')
+        if(auth?.keyword !== ""){
+          navigate({
+            pathname: "/dashboard",
+            search: createSearchParams({
+                search: auth?.keyword
+            }).toString()
+        });
+      }else{
+        navigate('/dashboard')
+        setIsDataChanged(!isDataChanged)
+      }
     
     } catch (error) {
         
@@ -28,7 +63,11 @@ const SearchForm = () => {
           type="search"
           placeholder="Search"
           value={auth.keyword}
-          onChange={(e) => setAuth({ ...auth, keyword: e.target.value })}
+          onChange={(e) => {
+            setSearchValue(e.target.value)
+            setAuth({ ...auth, keyword: e.target.value })
+            }
+          }
         />
         <button className="btn join-item rounded-r-full">Subscribe</button>
       </form>

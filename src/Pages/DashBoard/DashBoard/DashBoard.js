@@ -42,7 +42,8 @@ const DashBoard = () => {
               Add New User +
             </button>
           </Link>
-          <SearchForm/>
+          {/* Search Form */}
+          <SearchForm setData={setData} setIsDataChanged={setIsDataChanged} isDataChanged={isDataChanged}/>
           <div className="d-flex justify-content-end mb-3"></div>
           <table className="table">
             <thead>
