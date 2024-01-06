@@ -69,7 +69,7 @@ const SearchForm = ({setData, setIsDataChanged, isDataChanged}) => {
             }
           }
         />
-        <button className="btn join-item rounded-r-full">Subscribe</button>
+        <button className="btn join-item uppercase rounded-r-full">Search</button>
       </form>
     </div>
   );

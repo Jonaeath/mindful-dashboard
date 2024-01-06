@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/AuthProvider/AuthProvider";
 
 const Login = () => {
   const { login } = useContext(authContext);
+  const navigate = useNavigate();
 
   const handelLogin = (event) => {
     event.preventDefault();
@@ -19,6 +20,7 @@ const Login = () => {
         if (user) {
           alert("Your Login Complete Successfully");
           form.reset();
+          navigate('/dashboard')
         }
       })
       .catch((err) => {

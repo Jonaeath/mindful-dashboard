@@ -13,6 +13,9 @@ const Navbar = () => {
             <Link to = "/">
               <button>Home</button>
             </Link>
+            <Link to = "/dashboard">
+              <button>DashBoard</button>
+            </Link>
             <Link to='/login'>
             <button>Login</button>
             </Link>

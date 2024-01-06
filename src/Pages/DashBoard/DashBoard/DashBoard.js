@@ -36,23 +36,25 @@ const DashBoard = () => {
     <div>
       <div className="d-flex mx-5 mt-6 bg-blue-100">
         <div className="rounded p-3">
-          <h2>Admin Rule</h2>
-          <Link to="/createUser">
-            <button className="btn btn-success btn-sm uppercase mr-2 bg-lime-500">
+          <h2 className="uppercase text-3xl text-center font-bold">Admin Rule</h2>
+         <div className="text-center">
+         <Link to="/createUser">
+            <button className="btn btn-success btn-sm uppercase mr-2 text-xl bg-lime-500">
               Add New User +
             </button>
           </Link>
+         </div>
           {/* Search Form */}
           <SearchForm setData={setData} setIsDataChanged={setIsDataChanged} isDataChanged={isDataChanged}/>
           <div className="d-flex justify-content-end mb-3"></div>
           <table className="table">
             <thead>
-              <tr>
+              <tr className="uppercase text-xl font-bold">
                 <th>No</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Edit | Delete</th>
+                <th>Details | Edit | Delete</th>
               </tr>
             </thead>
             <tbody>
