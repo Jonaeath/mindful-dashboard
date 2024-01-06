@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SearchForm from "../../SearchForm/SearchForm";
 
 const DashBoard = () => {
   const [data, setData] = useState([]);
+  const [isDataChanged, setIsDataChanged] = useState(false)
  
-
   useEffect(() => {
     fetch("http://localhost:4000/users")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [isDataChanged]);
 
   const handelDelete = (id) => {
     const proceed = window.confirm('Are you sure you want to delete this user?');
@@ -23,18 +24,14 @@ const DashBoard = () => {
           console.log(data);
           if (data.success) {
             alert('User deleted successfully.');
-            const updatedUsers = data.filter((user) => user._id !== id);
-            setData(updatedUsers);
           } else {
             alert('Failed to delete user: ' + data.message);
           }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err)).finally(()=> setIsDataChanged(!isDataChanged))
     }
   };
-  
-  
-
+   
   return (
     <div>
       <div className="d-flex mx-5 mt-6 bg-blue-100">
@@ -45,6 +42,7 @@ const DashBoard = () => {
               Add New User +
             </button>
           </Link>
+          <SearchForm/>
           <div className="d-flex justify-content-end mb-3"></div>
           <table className="table">
             <thead>
